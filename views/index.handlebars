@@ -1,0 +1,110 @@
+<style>
+  .container{
+    padding: 0;
+  }
+  .jumbotron{
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-image: url('https://images.unsplash.com/photo-1478940020726-e9e191651f1a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 25vh;
+    align-items: center;
+    
+  }
+ 
+  .heading{
+    color: black !important;
+    font-size: 1.25rem;
+  }
+  .buttons{
+    display: flex;
+    justify-content: center;
+  }
+  .num{
+    color: white;
+    background: black;
+    border-radius: 5px;
+  }
+  .article-item{
+    border: 1px solid grey;
+    padding: 10px 15px;
+    background-color: rgb(228, 226, 226)
+  }
+  .article-list{
+    margin-top: 20px;
+  }
+  .article-heading{
+    font-weight: 700;
+  }
+  .article-desc{
+    font-size: 1.55rem
+  }
+  .card-bottom{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+  .add-note{
+    align-self: flex-end;
+  }
+  .delete-article{
+    align-self: flex-end;
+  }
+  .submit-note{
+    display: flex;
+    justify-content: center;
+  }
+  .submit-note{
+    margin-bottom: 20px;
+  }
+  .form-group{
+    margin-top: 10px;
+  }
+  .note-box{
+    display: none;
+  }
+</style>
+<div class="container">
+  <div class="jumbotron">
+    <h1 class="heading">New York Times Article Grabber
+    </h1>
+  </div>
+  <div class="buttons">
+    <button class="btn btn-dark scrape-news">Scrape World News</button>
+  </div>
+  <div class="article-list">
+     <ol>
+      {{#each data }}
+        <div class="article-item">
+          <h3 class="article-heading"><span class="num">{{@index}}:</span> {{title}}</h3>
+          <p class="article-desc">{{desc}}</p>
+          <div class="card-bottom">
+              <button class="btn btn-primary"  data-href="https://www.nytimes.com"{{link}}>See Article</button>
+              <button class="btn btn-success add-note" data-id={{_id}} index={{@index}}>Add Note</button>
+              <button class="btn btn-danger delete-article" data-id={{_id}}>Delete Article</button>
+          </div>
+        </div>
+        <div class="note-box" id="display-{{@index}}">
+          {{#each notes}}
+            <h1 id="note-{{_id}}">Note {{@index}}: <p>{{this.body}}</p> </h1>
+          {{/each}}
+          <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea class="form-control" rows="5" id="comment-{{@index}}"></textarea>
+          </div>
+          <div class="submit-note">
+            <button class="btn btn-secondary note-submit" index={{@index}} data-id={{_id}}> Submit-note</button>
+          </div> 
+        </div>      
+
+      {{/each}}
+    </ol>
+  </div>
+
+</div>
+
+
+
